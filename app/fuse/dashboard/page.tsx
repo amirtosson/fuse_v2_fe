@@ -43,21 +43,21 @@ export default function DashboardPage() {
                     <h1 className="text-xl font-bold text-gray-900 dark:text-white tracking-widest"><span className="text-cyan-500">FUSE</span> / PORTAL</h1>
                 </div>
                 <nav className="flex-1 px-4 py-8 space-y-2">
-                    <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-400 font-bold border border-cyan-200 dark:border-cyan-500/20 shadow-sm">
+                    <Link href="/fuse/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-400 font-bold border border-cyan-200 dark:border-cyan-500/20 shadow-sm">
                         Overview
-                    </a>
-                    <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
+                    </Link>
+                    <Link href="/fuse/reference-datasets" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
                         Reference Datasets
-                    </a>
+                    </Link>
                     <Link href="/fuse/public-datasets" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
                         Public Data
                     </Link>
-                    <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
+                    <Link href="/fuse/analytics" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
                         Analytics Hub
-                    </a>
-                    <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
+                    </Link>
+                    <Link href="/fuse/deposit" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all font-bold">
                         Deposit Reference Dataset
-                    </a>
+                    </Link>
                 </nav>
                 <div className="p-4 border-t border-gray-200 dark:border-gray-800">
                     <button onClick={handleLogout} className="w-full px-4 py-3 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors font-bold text-left">

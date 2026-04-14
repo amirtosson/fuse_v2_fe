@@ -4,6 +4,7 @@ import "./globals.css";
 import StatusIndicator from "@/components/StatusIndicator";
 import HistoryManager from "@/components/HistoryManager";
 import ThemeManager from "@/components/ThemeManager";
+import ActivityManager from "@/components/ActivityManager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <StatusIndicator />
         <HistoryManager />
         <ThemeManager />
+        <ActivityManager />
       </body>
     </html>
   );

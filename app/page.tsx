@@ -33,7 +33,7 @@ export default function SiegenXrayPlatform() {
             <section className="max-w-7xl mx-auto px-6 pb-32">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* FASTER */}
-                    <div className="group rounded-3xl overflow-hidden border border-gray-800 bg-gray-900 hover:border-gray-600 transition-all cursor-pointer shadow-2xl hover:shadow-purple-900/20 flex flex-col">
+                    <Link href="/faster" className="group rounded-3xl overflow-hidden border border-gray-800 bg-gray-900 hover:border-purple-500/50 transition-all cursor-pointer shadow-2xl hover:shadow-purple-900/20 flex flex-col">
                         <div className="aspect-video relative overflow-hidden">
                             <Image 
                                 src="/images/faster.png" 
@@ -44,13 +44,13 @@ export default function SiegenXrayPlatform() {
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                         </div>
                         <div className="p-8 flex-1 flex flex-col">
-                            <h3 className="text-2xl font-bold mb-3 text-white">FASTER</h3>
-                            <p className="text-gray-400 flex-1">Advanced synchrotron particle accelerator technology accelerating beam optimization.</p>
+                            <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-purple-300 transition-colors">FASTER</h3>
+                            <p className="text-gray-400 flex-1">Autonomous and unsupervised experiments accelerating materials discovery and data analysis.</p>
                             <div className="mt-6 flex items-center text-purple-400 font-medium group-hover:text-purple-300 transition-colors">
                                 Explore Project &rarr;
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Photonics */}
                     <div className="group rounded-3xl overflow-hidden border border-gray-800 bg-gray-900 hover:border-gray-600 transition-all cursor-pointer shadow-2xl hover:shadow-red-900/20 flex flex-col">

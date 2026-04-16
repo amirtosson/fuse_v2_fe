@@ -5,7 +5,7 @@ export default function SiegenXrayPlatform() {
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-cyan-500 selection:text-white transition-colors duration-300">
             {/* Header */}
-            <header className="border-b border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-md sticky top-0 z-50 transition-colors">
+            <header className="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center font-bold text-lg text-gray-900">

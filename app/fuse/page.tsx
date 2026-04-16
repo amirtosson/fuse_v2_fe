@@ -3,12 +3,14 @@ import Image from 'next/image';
 
 export default function FuseLandingPage() {
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-950 font-sans text-gray-950 dark:text-gray-100 flex flex-col transition-colors duration-300">
+        <div className="min-h-screen bg-background text-foreground font-sans flex flex-col transition-colors duration-300">
             <header className="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center gap-4">
-                    <Link href="/" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">&larr; Main Portal</Link>
-                    <div className="w-[1px] h-6 bg-gray-200 dark:bg-gray-700"></div>
-                    <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white tracking-widest"><span className="text-cyan-500">DAPHNE4NFDI</span> / FUSE</h1>
+                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <Link href="/" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-bold">&larr; Main Portal</Link>
+                        <div className="w-[1px] h-6 bg-gray-200 dark:bg-gray-700"></div>
+                        <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white tracking-widest"><span className="text-cyan-500">DAPHNE4NFDI</span> / FUSE</h1>
+                    </div>
                 </div>
             </header>
 
@@ -18,7 +20,7 @@ export default function FuseLandingPage() {
                     <h2 className="text-5xl lg:text-7xl font-black mb-8 leading-tight tracking-tighter text-gray-900 dark:text-white">
                         Manage your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-600 dark:from-cyan-400 dark:to-emerald-400">Beamline Data.</span>
                     </h2>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 leading-relaxed">
+                    <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 leading-relaxed font-medium">
                         FUSE provides secure, federated access to metadata, large-scale X-Ray datasets, and analytics pipelines. Authenticate below to access your workspace.
                     </p>
 

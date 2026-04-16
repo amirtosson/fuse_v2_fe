@@ -31,7 +31,7 @@ export default function DepositPage() {
                     </div>
                 </div>
             </header>
-            
+
             <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
                 <div className="mb-12">
                     <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-4">Submit Reference Data</h2>
@@ -42,11 +42,10 @@ export default function DepositPage() {
                 <div className="flex items-center gap-4 mb-12">
                     {[1, 2, 3].map((s) => (
                         <div key={s} className="flex items-center gap-4 flex-1 last:flex-none">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold border-2 transition-all ${
-                                step === s ? 'bg-emerald-500 border-emerald-500 text-gray-950 shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 
-                                step > s ? 'bg-emerald-100 dark:bg-emerald-900/40 border-emerald-200 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400' : 
-                                'bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-400 dark:text-gray-600'
-                            }`}>
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold border-2 transition-all ${step === s ? 'bg-emerald-500 border-emerald-500 text-gray-950 shadow-[0_0_20px_rgba(16,185,129,0.3)]' :
+                                step > s ? 'bg-emerald-100 dark:bg-emerald-900/40 border-emerald-200 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400' :
+                                    'bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-400 dark:text-gray-600'
+                                }`}>
                                 {s}
                             </div>
                             {s < 3 && <div className={`h-[2px] flex-1 rounded-full ${step > s ? 'bg-emerald-500' : 'bg-gray-200 dark:bg-gray-800'}`}></div>}
@@ -56,7 +55,7 @@ export default function DepositPage() {
 
                 <div className="bg-white dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden transition-all">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[80px] pointer-events-none rounded-full"></div>
-                    
+
                     {step === 1 && (
                         <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
@@ -66,51 +65,74 @@ export default function DepositPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Dataset Title</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600" 
+                                    <input
+                                        type="text"
+                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                         placeholder="e.g. Silicon Calibration Standard 2024"
                                         value={formData.title}
-                                        onChange={(e) => setFormData({...formData, title: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Principal Investigator</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600" 
+                                    <input
+                                        type="text"
+                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                         placeholder="Full Name"
                                         value={formData.pi}
-                                        onChange={(e) => setFormData({...formData, pi: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, pi: e.target.value })}
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Target Instrument</label>
-                                    <select 
+                                    <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Beamline Facility</label>
+                                    <select
                                         className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all"
                                         value={formData.instrument}
-                                        onChange={(e) => setFormData({...formData, instrument: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, instrument: e.target.value })}
                                     >
-                                        <option value="">Select Instrument...</option>
-                                        <option value="DAPHNE">DAPHNE (XRR/XRD)</option>
-                                        <option value="FRED">FRED (Magnetic X-Ray)</option>
-                                        <option value="SAXS-HUB">SAXS-Hub</option>
-                                        <option value="PHOTONICS">Photonics-MX</option>
+                                        <option value="">Select Facility...</option>
+                                        <optgroup label="PETRA III (DESY)">
+                                            <option value="PETRA-P08">P08 (High-Res Diffraction)</option>
+                                            <option value="PETRA-P10">P10 (Coherence / XPCS)</option>
+                                            <option value="PETRA-P12">P12 (BioSAXS)</option>
+                                        </optgroup>
+                                        <optgroup label="ESRF (Grenoble)">
+                                            <option value="ESRF-ID08">ID08 (Magnetic Scattering)</option>
+                                            <option value="ESRF-ID10">ID10 (Soft Matter / Coherent)</option>
+                                            <option value="ESRF-ID11">ID11 (Materials Science)</option>
+                                        </optgroup>
+                                        <optgroup label="EuXFEL (Hamburg)">
+                                            <option value="EUXFEL-NID">NID@EuXFEL</option>
+                                            <option value="EUXFEL-SPB">SPB/SFX (Biology)</option>
+                                            <option value="EUXFEL-MID">MID (Materials Imaging)</option>
+                                        </optgroup>
+                                        <optgroup label="MAX IV (Lund)">
+                                            <option value="MAXIV-BIOMAX">BioMAX</option>
+                                            <option value="MAXIV-NANOMAX">NanoMAX</option>
+                                        </optgroup>
+                                        <optgroup label="Diamond (UK)">
+                                            <option value="DIAMOND-I04">I04 (Macromolecular)</option>
+                                            <option value="DIAMOND-I24">I24 (Microfocus)</option>
+                                        </optgroup>
+                                        <optgroup label="PSI (Switzerland)">
+                                            <option value="SLS-CSAXS">cSAXS</option>
+                                            <option value="SLS-SIM">SIM</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Scientific Technique</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600" 
+                                    <input
+                                        type="text"
+                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                         placeholder="e.g. Grazing Incidence Scattering"
                                         value={formData.technique}
-                                        onChange={(e) => setFormData({...formData, technique: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, technique: e.target.value })}
                                     />
                                 </div>
                             </div>
                             <div className="pt-8 flex justify-end">
-                                <button 
+                                <button
                                     disabled={!isStep1Valid}
                                     onClick={handleNext}
                                     className="px-10 py-4 bg-emerald-500 hover:bg-emerald-400 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:text-gray-400 dark:disabled:text-gray-600 text-gray-950 font-black rounded-xl transition-all shadow-xl shadow-emerald-500/20 dark:shadow-emerald-950/20 active:scale-95 uppercase tracking-widest text-xs"
@@ -123,37 +145,37 @@ export default function DepositPage() {
 
                     {step === 2 && (
                         <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
-                             <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                                 <span className="w-1 h-6 bg-emerald-500 rounded-full"></span>
                                 Step 2: Technical Description
                             </h3>
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Abstract / Description</label>
-                                <textarea 
+                                <textarea
                                     rows={5}
-                                    className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all resize-none placeholder:text-gray-400 dark:placeholder:text-gray-600" 
+                                    className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all resize-none placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                     placeholder="Provide detailed information about the sample, environment, and collection parameters..."
                                     value={formData.abstract}
-                                    onChange={(e) => setFormData({...formData, abstract: e.target.value})}
+                                    onChange={(e) => setFormData({ ...formData, abstract: e.target.value })}
                                 ></textarea>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Optional DOI</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600" 
+                                    <input
+                                        type="text"
+                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                                         placeholder="10.xxxx/xxxxx"
                                         value={formData.doi}
-                                        onChange={(e) => setFormData({...formData, doi: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, doi: e.target.value })}
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest">Claimed Quality</label>
-                                    <select 
-                                        className="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+                                    <select
+                                        className="w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white outline-none transition-all"
                                         value={formData.quality}
-                                        onChange={(e) => setFormData({...formData, quality: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, quality: e.target.value })}
                                     >
                                         <option value="Research Grade">Research Grade (Standard Verification)</option>
                                         <option value="Silver Standard">Silver Standard (Peer Reviewed)</option>
@@ -165,7 +187,7 @@ export default function DepositPage() {
                                 <button onClick={handleBack} className="px-10 py-4 text-gray-500 dark:text-gray-400 font-bold hover:text-gray-900 dark:hover:text-white transition-colors uppercase tracking-widest text-xs">
                                     Go Back
                                 </button>
-                                <button 
+                                <button
                                     onClick={handleNext}
                                     className="px-10 py-4 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-black rounded-xl transition-all shadow-xl shadow-emerald-950/20 active:scale-95 uppercase tracking-widest text-xs"
                                 >
@@ -177,21 +199,21 @@ export default function DepositPage() {
 
                     {step === 3 && (
                         <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500 text-center">
-                             <div className="mx-auto w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
+                            <div className="mx-auto w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
                                 <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                             </div>
-                             <h3 className="text-2xl font-black text-gray-900 dark:text-white">Initializing Secure Transfer...</h3>
-                             <p className="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">Please wait while we establish an encrypted bridge to the primary DAPHNE data cluster for your files.</p>
-                             
-                             <div className="pt-12 flex justify-center">
-                                <button 
+                            </div>
+                            <h3 className="text-2xl font-black text-gray-900 dark:text-white">Initializing Secure Transfer...</h3>
+                            <p className="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">Please wait while we establish an encrypted bridge to the primary DAPHNE data cluster for your files.</p>
+
+                            <div className="pt-12 flex justify-center">
+                                <button
                                     onClick={() => alert('Secure Upload Initiated - FUSE Core Bridge connected.')}
                                     className="px-12 py-5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-gray-950 font-black rounded-2xl transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)] active:scale-95 uppercase tracking-widest text-sm"
                                 >
                                     Authorize File Picker
                                 </button>
-                             </div>
-                             <button onClick={handleBack} className="mt-8 px-10 py-4 text-gray-600 text-xs font-bold hover:text-gray-400">Cancel & Return</button>
+                            </div>
+                            <button onClick={handleBack} className="mt-8 px-10 py-4 text-gray-600 text-xs font-bold hover:text-gray-400">Cancel & Return</button>
                         </div>
                     )}
                 </div>

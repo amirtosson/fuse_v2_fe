@@ -57,12 +57,12 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-white dark:bg-gray-950 font-sans relative transition-colors duration-300">
-            <Link href="/fuse" className="absolute top-8 left-8 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors hidden sm:block">
+        <div className="flex min-h-screen items-center justify-center bg-background text-foreground font-sans relative transition-colors duration-300">
+            <Link href="/fuse" className="absolute top-8 left-8 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-bold transition-colors hidden sm:block">
                 &larr; Back to FUSE Portal
             </Link>
 
-            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-900/80 rounded-3xl shadow-2xl dark:shadow-cyan-900/20 border border-gray-200 dark:border-gray-800 backdrop-blur-xl">
+            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-900/80 rounded-3xl shadow-2xl dark:shadow-black border border-gray-200 dark:border-gray-800 backdrop-blur-xl">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">FUSE <span className="text-cyan-500">V2</span></h1>
                     <p className="text-gray-600 dark:text-gray-400 mt-2 tracking-wide">Sign in to your beamline space</p>

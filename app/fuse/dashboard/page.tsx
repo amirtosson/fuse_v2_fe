@@ -45,7 +45,7 @@ export default function DashboardPage() {
     const initRight = lastName ? lastName.charAt(0).toUpperCase() : '';
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-950 dark:text-gray-100 font-sans flex overflow-hidden transition-colors duration-300">
+        <div className="min-h-screen bg-background text-foreground font-sans flex overflow-hidden transition-colors duration-300">
             {/* Sidebar */}
             <aside className="w-64 border-r border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 flex-col hidden md:flex shrink-0">
                 <div className="h-20 flex items-center px-6 border-b border-gray-200 dark:border-gray-800">
@@ -77,8 +77,8 @@ export default function DashboardPage() {
 
             {/* Main Content */}
             <main className="flex-1 flex flex-col h-screen overflow-y-auto w-full">
-                <header className="h-20 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-30 shrink-0">
-                    <h2 className="text-xl font-bold tracking-wide hidden sm:block text-gray-900 dark:text-white">Workspace Dashboard</h2>
+                <header className="h-20 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-30 shrink-0 shadow-sm">
+                    <h2 className="text-xl font-bold tracking-wide hidden sm:block text-gray-900 dark:text-white uppercase tracking-widest">Workspace Dashboard</h2>
                     <button onClick={handleLogout} className="sm:hidden px-4 py-2 bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 rounded-lg text-sm font-bold">Logout</button>
 
                     <div className="flex items-center gap-4">
@@ -95,20 +95,20 @@ export default function DashboardPage() {
                 <div className="p-4 sm:p-8 max-w-6xl mx-auto w-full">
                     <div className="mb-10 mt-4">
                         <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 underline decoration-cyan-500/30 decoration-4 underline-offset-8">Welcome back, {firstName || 'User'}!</h3>
-                        <p className="text-gray-600 dark:text-gray-400 font-medium mt-4">Here's the latest data aggregation for your working group: <span className="text-cyan-600 dark:text-cyan-400 font-black">{user.working_group || 'General FUSE Platform'}</span></p>
+                        <p className="text-gray-600 dark:text-gray-400 font-bold mt-4">Here's the latest data aggregation for your working group: <span className="text-cyan-600 dark:text-cyan-400 font-black">{user.working_group || 'General FUSE Platform'}</span></p>
                     </div>
 
                     {/* Metadata Overview Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                        <div className="p-6 bg-white dark:bg-gray-900/80 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-black/50 relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
-                            <h4 className="text-gray-400 dark:text-gray-500 text-xs font-black mb-1 uppercase tracking-widest">Organization</h4>
+                        <div className="p-6 bg-white dark:bg-gray-900/60 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl shadow-gray-200/20 dark:shadow-black/40 relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
+                            <h4 className="text-gray-400 dark:text-gray-500 text-[10px] font-black mb-1 uppercase tracking-widest">Organization</h4>
                             <p className="text-xl font-black text-gray-900 dark:text-white truncate group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">{user.user?.organization || 'University of Siegen'}</p>
                         </div>
-                        <div className="p-6 bg-white dark:bg-gray-900/80 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-black/50 relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
-                            <h4 className="text-gray-400 dark:text-gray-500 text-xs font-black mb-1 uppercase tracking-widest">Department</h4>
+                        <div className="p-6 bg-white dark:bg-gray-900/60 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl shadow-gray-200/20 dark:shadow-black/40 relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
+                            <h4 className="text-gray-400 dark:text-gray-500 text-[10px] font-black mb-1 uppercase tracking-widest">Department</h4>
                             <p className="text-xl font-black text-gray-900 dark:text-white truncate group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">{user.user?.department || 'Physics & X-Ray Science'}</p>
                         </div>
-                        <div className="p-6 bg-cyan-50 dark:bg-gray-900/80 rounded-2xl border border-cyan-200 dark:border-cyan-900/50 shadow-xl shadow-cyan-500/10 relative overflow-hidden">
+                        <div className="p-6 bg-cyan-50/50 dark:bg-cyan-900/10 rounded-2xl border border-cyan-200/50 dark:border-cyan-900/50 shadow-xl shadow-cyan-500/5 relative overflow-hidden">
                             <div className="absolute right-0 top-0 w-32 h-32 bg-emerald-500/20 dark:bg-emerald-500/10 blur-[50px] rounded-full pointer-events-none"></div>
                             <h4 className="text-cyan-700 dark:text-cyan-600 text-xs font-black mb-1 uppercase tracking-widest">Authentication Status</h4>
                             <div className="flex items-center gap-3 relative z-10">

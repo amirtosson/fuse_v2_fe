@@ -7,7 +7,7 @@ export default function FasterProjectPage() {
     return (
         <div className="min-h-screen bg-background text-foreground font-sans selection:bg-purple-500 selection:text-white pb-20 transition-colors duration-300">
             {/* Navigation / Header */}
-            <header className="border-b border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-md sticky top-0 z-50 transition-colors">
+            <header className="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <Link href="/" className="flex items-center gap-2 group">

@@ -53,7 +53,7 @@ export default async function PublicDatasetsPage({ searchParams }: { searchParam
     };
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-950 dark:text-gray-100 font-sans flex flex-col transition-colors duration-300">
+        <div className="min-h-screen bg-background text-foreground font-sans flex flex-col transition-colors duration-300">
             <header className="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
                 <div className="max-w-[90rem] mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-4">

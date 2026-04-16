@@ -3,7 +3,7 @@ import { api } from '@/lib/api';
 
 async function getDatasets(searchParams: any) {
     const page = parseInt(searchParams.page || '1');
-    const facilities = searchParams.facilities || 'DESY,ESS';
+    const facilities = searchParams.facilities || 'DESY,ESS,MAXIV';
     
     // Construct request parameters for our aggregator
     const params: any = {
@@ -30,7 +30,7 @@ export default async function PublicDatasetsPage({ searchParams }: { searchParam
     const currentView = resolvedParams?.view || 'thumbnail';
     const isList = currentView === 'list';
     const currentPage = parseInt(resolvedParams.page || '1');
-    const selectedFacilities = resolvedParams.facilities ? resolvedParams.facilities.split(',') : ['DESY', 'ESS'];
+    const selectedFacilities = resolvedParams.facilities ? resolvedParams.facilities.split(',') : ['DESY', 'ESS', 'MAXIV'];
 
     let datasets = [];
     let error = null;
@@ -78,11 +78,18 @@ export default async function PublicDatasetsPage({ searchParams }: { searchParam
                         <div className="mb-8 space-y-3">
                             <label className="block text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-3">Target Facilities</label>
                             <div className="space-y-2">
-                                {['DESY', 'ESS'].map((fac) => {
+                                {['DESY', 'ESS', 'MAXIV'].map((fac) => {
                                     const isActive = selectedFacilities.includes(fac);
                                     const nextFacilities = isActive 
                                         ? selectedFacilities.filter(f => f !== fac).join(',')
                                         : [...selectedFacilities, fac].join(',');
+                                    
+                                    const getColor = (f: string) => {
+                                        if (f === 'DESY') return 'cyan';
+                                        if (f === 'ESS') return 'indigo';
+                                        return 'orange';
+                                    };
+                                    const color = getColor(fac);
                                     
                                     return (
                                         <Link 
@@ -90,12 +97,12 @@ export default async function PublicDatasetsPage({ searchParams }: { searchParam
                                             href={constructUrl({ facilities: nextFacilities || null })}
                                             className={`flex items-center justify-between px-4 py-3 rounded-xl border transition-all ${
                                                 isActive 
-                                                ? 'bg-cyan-500/10 border-cyan-500/50 text-cyan-700 dark:text-cyan-400 shadow-[inset_0_0_10px_rgba(6,182,212,0.1)]' 
+                                                ? `bg-${color}-500/10 border-${color}-500/50 text-${color}-700 dark:text-${color}-400 shadow-[inset_0_0_10px_rgba(var(--${color}-rgb),0.1)]` 
                                                 : 'bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800 text-gray-500'
                                             }`}
                                         >
                                             <span className="text-sm font-bold tracking-tight uppercase">{fac} NODE</span>
-                                            <div className={`w-4 h-4 rounded-full border-2 ${isActive ? 'bg-cyan-500 border-cyan-500 ring-4 ring-cyan-500/20' : 'border-gray-300 dark:border-gray-700'}`}></div>
+                                            <div className={`w-4 h-4 rounded-full border-2 ${isActive ? `bg-${color}-500 border-${color}-500 ring-4 ring-${color}-500/20` : 'border-gray-300 dark:border-gray-700'}`}></div>
                                         </Link>
                                     );
                                 })}
@@ -169,6 +176,8 @@ export default async function PublicDatasetsPage({ searchParams }: { searchParam
                                                     <span className={`px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-tighter shadow-sm border ${
                                                         ds.facilitySource === 'ESS' 
                                                         ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-500 shadow-indigo-500/10' 
+                                                        : ds.facilitySource === 'MAXIV'
+                                                        ? 'bg-orange-500/10 border-orange-500/20 text-orange-500 shadow-orange-500/10'
                                                         : 'bg-cyan-500/10 border-cyan-500/20 text-cyan-600 shadow-cyan-500/10'
                                                     }`}>
                                                         {ds.facilitySource} SOURCE

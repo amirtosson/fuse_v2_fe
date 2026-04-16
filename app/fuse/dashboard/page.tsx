@@ -13,13 +13,10 @@ export default function DashboardPage() {
     const router = useRouter();
 
     const [isMounted, setIsMounted] = useState(false);
-    const [counts, setCounts] = useState<{ DESY: number, ESS: number, total: number } | null>(null);
+    const [counts, setCounts] = useState<{ DESY: number, ESS: number, MAXIV: number, total: number } | null>(null);
 
     useEffect(() => {
         setIsMounted(true);
-    }, []);
-
-    useEffect(() => {
         if (isMounted) {
             if (!isAuthenticated) {
                 router.push('/fuse/login');
@@ -124,13 +121,13 @@ export default function DashboardPage() {
                     {/* Widgets Area */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
                         {/* Facility Distribution Widget */}
-                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 min-h-[20rem] flex flex-col relative overflow-hidden group">
+                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 min-h-[25rem] flex flex-col relative overflow-hidden group">
                             <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/10 dark:bg-cyan-500/5 blur-[80px] rounded-full group-hover:bg-cyan-500/20 dark:group-hover:bg-cyan-500/10 transition-colors"></div>
                             <h4 className="text-xl font-black text-gray-900 dark:text-white mb-2 leading-none uppercase tracking-tighter">Facility Data Nodes</h4>
                             <p className="text-gray-500 dark:text-gray-400 mb-8 font-bold text-[10px] uppercase tracking-widest">Live Integrated Metadata Repositories</p>
 
-                            <div className="flex-1 space-y-6">
-                                <div className="flex items-center justify-between p-5 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
+                            <div className="flex-1 space-y-4">
+                                <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
                                     <div className="flex items-center gap-4">
                                         <div className="w-2 h-10 bg-cyan-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
                                         <div>
@@ -144,7 +141,7 @@ export default function DashboardPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center justify-between p-5 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
+                                <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
                                     <div className="flex items-center gap-4">
                                         <div className="w-2 h-10 bg-indigo-500 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
                                         <div>
@@ -155,6 +152,20 @@ export default function DashboardPage() {
                                     <div className="text-right">
                                         <p className="text-3xl font-black text-gray-900 dark:text-white leading-none">{counts?.ESS || '...'}</p>
                                         <p className="text-[10px] font-black uppercase text-indigo-600 mt-1 tracking-tighter">Datasets</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-2 h-10 bg-orange-500 rounded-full shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
+                                        <div>
+                                            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-0.5">MAX IV Node</p>
+                                            <p className="font-mono text-gray-500 dark:text-gray-600 text-[10px]">scicat.maxiv.lu.se</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-3xl font-black text-gray-900 dark:text-white leading-none">{counts?.MAXIV || '...'}</p>
+                                        <p className="text-[10px] font-black uppercase text-orange-600 mt-1 tracking-tighter">Datasets</p>
                                     </div>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ import { useUserStore } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { api } from '@/lib/api';
 
 export default function DashboardPage() {
     const user = useUserStore((state) => state.user);
@@ -12,11 +13,22 @@ export default function DashboardPage() {
     const router = useRouter();
 
     const [isMounted, setIsMounted] = useState(false);
+    const [counts, setCounts] = useState<{ DESY: number, ESS: number, total: number } | null>(null);
 
     useEffect(() => {
         setIsMounted(true);
-        if (isMounted && !isAuthenticated) {
-            router.push('/fuse/login');
+    }, []);
+
+    useEffect(() => {
+        if (isMounted) {
+            if (!isAuthenticated) {
+                router.push('/fuse/login');
+            } else {
+                // Fetch Live Counts
+                api.get('/datasets/counts')
+                    .then(res => setCounts(res.data.data))
+                    .catch(err => console.error("Dashboard Stats Error:", err));
+            }
         }
     }, [isAuthenticated, isMounted, router]);
 
@@ -111,33 +123,58 @@ export default function DashboardPage() {
 
                     {/* Widgets Area */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
-                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 h-80 flex flex-col relative overflow-hidden group">
-                            <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-500/10 dark:bg-blue-500/5 blur-[80px] rounded-full group-hover:bg-blue-500/20 dark:group-hover:bg-blue-500/10 transition-colors"></div>
-                            <h4 className="text-xl font-black text-gray-900 dark:text-white mb-2 leading-none">Recent Beamtime Data</h4>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6 font-bold text-xs uppercase tracking-wider">Synced from DAPHNE4NFDI primary cluster</p>
+                        {/* Facility Distribution Widget */}
+                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 min-h-[20rem] flex flex-col relative overflow-hidden group">
+                            <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/10 dark:bg-cyan-500/5 blur-[80px] rounded-full group-hover:bg-cyan-500/20 dark:group-hover:bg-cyan-500/10 transition-colors"></div>
+                            <h4 className="text-xl font-black text-gray-900 dark:text-white mb-2 leading-none uppercase tracking-tighter">Facility Data Nodes</h4>
+                            <p className="text-gray-500 dark:text-gray-400 mb-8 font-bold text-[10px] uppercase tracking-widest">Live Integrated Metadata Repositories</p>
 
-                            <div className="flex-1 bg-white/80 dark:bg-gray-950/50 rounded-2xl border border-gray-200 dark:border-gray-800 flex items-center justify-center relative overflow-hidden shadow-inner">
-                                <div className="text-center relative z-10">
-                                    <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 mb-2">14.8 PB</div>
-                                    <p className="text-xs text-gray-400 dark:text-gray-500 font-black uppercase tracking-widest">Total Processed Volume</p>
+                            <div className="flex-1 space-y-6">
+                                <div className="flex items-center justify-between p-5 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-2 h-10 bg-cyan-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
+                                        <div>
+                                            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-0.5">DESY Node</p>
+                                            <p className="font-mono text-gray-500 dark:text-gray-600 text-[10px]">public-data.desy.de</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-3xl font-black text-gray-900 dark:text-white leading-none">{counts?.DESY || '...'}</p>
+                                        <p className="text-[10px] font-black uppercase text-cyan-600 mt-1 tracking-tighter">Datasets</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between p-5 bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm group/item">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-2 h-10 bg-indigo-500 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                                        <div>
+                                            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-0.5">ESS Node</p>
+                                            <p className="font-mono text-gray-500 dark:text-gray-600 text-[10px]">scicat.ess.eu</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-3xl font-black text-gray-900 dark:text-white leading-none">{counts?.ESS || '...'}</p>
+                                        <p className="text-[10px] font-black uppercase text-indigo-600 mt-1 tracking-tighter">Datasets</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 h-80 flex flex-col relative overflow-hidden group">
-                            <div className="absolute -left-20 top-20 w-64 h-64 bg-cyan-500/10 dark:bg-cyan-500/5 blur-[80px] rounded-full group-hover:bg-cyan-500/20 dark:group-hover:bg-cyan-500/10 transition-colors"></div>
-                            <h4 className="text-xl font-black text-gray-900 dark:text-white mb-2 leading-none">X-Ray Diffraction Jobs</h4>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6 font-bold text-xs uppercase tracking-wider">Live computational node execution</p>
+                        {/* Global Registry Sync Widget */}
+                        <div className="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-3xl border border-gray-200 dark:border-gray-800 min-h-[20rem] flex flex-col relative overflow-hidden group">
+                            <div className="absolute -left-20 top-20 w-64 h-64 bg-emerald-500/10 dark:bg-emerald-500/5 blur-[80px] rounded-full group-hover:bg-emerald-500/20 dark:group-hover:bg-emerald-500/10 transition-colors"></div>
+                            <h4 className="text-xl font-black text-gray-900 dark:text-white mb-2 leading-none uppercase tracking-tighter">Global Registry Sync</h4>
+                            <p className="text-gray-500 dark:text-gray-400 mb-8 font-bold text-[10px] uppercase tracking-widest">Total Aggregated FUSE Metadata</p>
 
-                            <div className="flex-1 bg-white/80 dark:bg-gray-950/50 rounded-2xl border border-gray-200 dark:border-gray-800 flex items-center justify-center p-6 pb-2 shadow-inner">
-                                {/* Mock UI Chart Effect */}
-                                <div className="w-full h-full flex items-end gap-2 px-2 shadow-[inset_0_-1px_0_rgba(0,0,0,0.05)] dark:shadow-[inset_0_-1px_0_rgba(255,255,255,0.05)]">
-                                    <div className="w-full bg-cyan-100 dark:bg-cyan-900/30 rounded-t-sm h-[30%] relative"><div className="absolute top-0 w-full h-[2px] bg-cyan-400 dark:bg-cyan-600"></div></div>
-                                    <div className="w-full bg-cyan-100 dark:bg-cyan-900/30 rounded-t-sm h-[60%] relative animate-[pulse_3s_ease-in-out_infinite]"><div className="absolute top-0 w-full h-[2px] bg-cyan-400 dark:bg-cyan-600"></div></div>
-                                    <div className="w-full bg-cyan-100 dark:bg-cyan-900/30 rounded-t-sm h-[40%] relative"><div className="absolute top-0 w-full h-[2px] bg-cyan-400 dark:bg-cyan-600"></div></div>
-                                    <div className="w-full bg-cyan-200 dark:bg-cyan-900/50 rounded-t-sm h-[90%] relative"><div className="absolute top-0 w-full h-[2px] bg-cyan-500 dark:bg-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.4)] dark:shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div></div>
-                                    <div className="w-full bg-cyan-100 dark:bg-cyan-900/30 rounded-t-sm h-[75%] relative animate-[pulse_4s_ease-in-out_infinite]"><div className="absolute top-0 w-full h-[2px] bg-cyan-400 dark:bg-cyan-600"></div></div>
-                                    <div className="w-full bg-cyan-100 dark:bg-cyan-900/30 rounded-t-sm h-[50%] relative"><div className="absolute top-0 w-full h-[2px] bg-cyan-400 dark:bg-cyan-600"></div></div>
+                            <div className="flex-1 bg-white dark:bg-gray-950/50 rounded-[2.5rem] border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center p-8 relative overflow-hidden shadow-inner">
+                                <div className="relative z-10 text-center">
+                                    <div className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 mb-4 animate-[pulse_5s_ease-in-out_infinite]">
+                                        {counts?.total.toLocaleString() || '...'}
+                                    </div>
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                                        Live Aggregation Active
+                                    </div>
                                 </div>
                             </div>
                         </div>

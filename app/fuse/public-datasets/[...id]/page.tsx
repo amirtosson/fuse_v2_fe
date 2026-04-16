@@ -3,7 +3,6 @@ import { api } from '@/lib/api';
 
 async function getDataset(pid: string, facility: string) {
     if (!facility) throw new Error("Missing facility information for PID resolution.");
-
     try {
         const res = await api.get(`/datasets/public/${encodeURIComponent(pid)}`, {
             params: { facility }
@@ -15,21 +14,21 @@ async function getDataset(pid: string, facility: string) {
 }
 
 // Next.js 15 requires params & searchParams to be Promise
-export default async function DatasetDetail({ 
-    params, 
-    searchParams 
-}: { 
+export default async function DatasetDetail({
+    params,
+    searchParams
+}: {
     params: Promise<{ id: string[] }>,
     searchParams: Promise<{ [key: string]: string }>
 }) {
-    
+
     const resolvedParams = await params;
     const resolvedSearch = await searchParams;
     const facility = resolvedSearch.facility;
 
     // Decode the catch-all ID which might be split by slashes
     const fullId = resolvedParams.id.map(decodeURIComponent).join('/');
-    
+
     let dataset = null;
     let error = null;
     try {
@@ -83,14 +82,14 @@ export default async function DatasetDetail({
 
                             <div className="flex flex-wrap items-center gap-6 text-xs text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest bg-gray-50 dark:bg-gray-900/50 p-6 rounded-[2rem] border border-gray-200 dark:border-gray-800 shadow-inner">
                                 <span className="flex items-center gap-2">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div> 
+                                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
                                     P.I. : <span className="text-gray-900 dark:text-white">
                                         {Array.isArray(dataset.principalInvestigators) ? dataset.principalInvestigators.join(', ') : (dataset.principalInvestigator || dataset.owner)}
                                     </span>
                                 </span>
-                                
+
                                 <span>Created: <span className="text-gray-900 dark:text-white ml-2">{new Date(dataset.creationTime).toLocaleDateString()}</span></span>
-                                
+
                                 <span className="bg-white dark:bg-gray-950 px-4 py-2 rounded-xl font-mono text-cyan-600 dark:text-cyan-500 border border-gray-200 dark:border-cyan-900/50 shadow-sm">{dataset.pid}</span>
                             </div>
                         </div>

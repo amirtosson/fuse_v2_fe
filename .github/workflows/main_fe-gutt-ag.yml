@@ -19,6 +19,8 @@ jobs:
           node-version: '22.x'
 
       - name: npm install, build, and test
+        env:
+          NEXT_PUBLIC_API_KEY_FE_MAIN: ${{ secrets.NEXT_PUBLIC_API_KEY_FE_MAIN }}
         run: |
           npm install
           npm run build --if-present
